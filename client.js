@@ -5,6 +5,7 @@ Parse.serverURL = 'http://localhost:1337/parse'
 
 var ClassObject = Parse.Object.extend('GameScore');
 var query = new Parse.Query(ClassObject);
+query.get('k5bzOBqKIo')
 var subscription = query.subscribe();
 
 
@@ -17,7 +18,10 @@ subscription.on('update', function(obj)
   console.log('update', obj.attributes)
 });
 
-
+Parse.Cloud.run('averageStars', { movie: 'The Matrix' }).then(function(ratings) {
+  console.log(ratings)
+  // ratings should be 4.5
+});
 // gameScore.set("score", 1337);
 // gameScore.set("playerName", "Sean Plott");
 // gameScore.set("cheatMode", false);

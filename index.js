@@ -22,7 +22,9 @@ var dashboard = new ParseDashboard({
       "serverURL": "http://localhost:1337/parse",
       "appId": "myAppId",
       "masterKey": "myMasterKey",
-      "appName": "MyParse"
+      "appName": "MyParse",
+      "supportedPushLocales": []
+
     }
   ]
 });
@@ -30,6 +32,14 @@ var dashboard = new ParseDashboard({
 // Serve the Parse API on the /parse URL prefix
 app.use('/parse', api);
 app.use('/dashboard', dashboard);
+
+
+Parse.Cloud.define("averageStars", function(request, response) {
+  response.success({
+    success: true,
+    data: 'first query'
+  })
+})
 
 // app.listen(1337, function() {
 //   console.log('parse-server-example running on port 1337.');
